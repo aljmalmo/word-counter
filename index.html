@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عداد الكلمات التفاعلي</title>
+    <!-- ملف التصميم الرئيسي -->
+    <link rel="stylesheet" href="style.css">
+    <!-- خط Cairo العربي من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <i class="fas fa-calculator"></i>
+                    عداد الكلمات التفاعلي
+                </h1>
+                <p class="subtitle">أداة قوية لعد الكلمات والأحرف والفقرات بشكل فوري</p>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeToggle" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Text Input Section -->
+            <section class="input-section">
+                <div class="input-header">
+                    <h2>
+                        <i class="fas fa-edit"></i>
+                        منطقة النص
+                    </h2>
+                    <div class="input-controls">
+                        <button id="pasteBtn" class="control-btn">
+                            <i class="fas fa-paste"></i>
+                            لصق
+                        </button>
+                        <button id="clearBtn" class="control-btn">
+                            <i class="fas fa-trash"></i>
+                            مسح
+                        </button>
+                    </div>
+                </div>
+                <div class="textarea-container">
+                    <textarea 
+                        id="textInput" 
+                        placeholder="اكتب أو الصق النص هنا لبدء العد التلقائي..."
+                        spellcheck="false"
+                    ></textarea>
+                    <div class="textarea-overlay">
+                        <div class="character-count">
+                            <span id="currentLength">0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <div class="stats-header">
+                    <h2>
+                        <i class="fas fa-chart-bar"></i>
+                        الإحصائيات
+                    </h2>
+                    <button id="copyStatsBtn" class="control-btn">
+                        <i class="fas fa-copy"></i>
+                        نسخ الإحصائيات
+                    </button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card words">
+                        <div class="stat-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="wordCount">0</div>
+                            <div class="stat-label">كلمة</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="wordProgress"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card characters">
+                        <div class="stat-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="charCount">0</div>
+                            <div class="stat-label">حرف (مع المسافات)</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="charProgress"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card characters-no-space">
+                        <div class="stat-icon">
+                            <i class="fas fa-text-width"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="charNoSpaceCount">0</div>
+                            <div class="stat-label">حرف (بدون مسافات)</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="charNoSpaceProgress"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card paragraphs">
+                        <div class="stat-icon">
+                            <i class="fas fa-paragraph"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="paragraphCount">0</div>
+                            <div class="stat-label">فقرة</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="paragraphProgress"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card sentences">
+                        <div class="stat-icon">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="sentenceCount">0</div>
+                            <div class="stat-label">جملة</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="sentenceProgress"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card reading-time">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="readingTime">0</div>
+                            <div class="stat-label">دقيقة للقراءة</div>
+                        </div>
+                        <div class="stat-progress">
+                            <div class="progress-bar" id="readingProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="additional-info">
+                    <div class="info-item">
+                        <i class="fas fa-language"></i>
+                        <span>متوسط طول الكلمة: <span id="avgWordLength">0</span> حرف</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-list-ol"></i>
+                        <span>متوسط الكلمات في الجملة: <span id="avgWordsPerSentence">0</span></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                <i class="fas fa-heart"></i>
+                صُنع بحب لمساعدتك في عد الكلمات بسهولة
+            </p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">تم النسخ بنجاح!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
